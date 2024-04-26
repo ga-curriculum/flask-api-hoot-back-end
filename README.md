@@ -1,14 +1,14 @@
-# ![[tktk Module Name]](./assets/tktk-hero.png)
+# ![Flask API Related Data](./assets/tktk-hero.png)
 
 ## About
 
-tktk Write a short but descriptive summary of the content in this module.
+In this lesson, we'll put it all together by creating a REST API with Flask that authenticates users with JWTs and associates data across multiple tables.
 
 ## Prerequisites
 
-- tktk
-- tktk
-- tktk
+- Intro to SQL
+- Flask Postgres REST API
+- JWT Authentication with Flask
 
 ## Content
 
@@ -16,17 +16,10 @@ tktk Write a short but descriptive summary of the content in this module.
 | ------ |:----------:|:-----:| ------ |
 | [Setup](./setup/README.md)                               | -- | -- | Setting up the development environment  |
 | [Concepts](./concepts/README.md)                         | -- | -- | tktk skills covered                     |
-| [tktk Microlesson Name](./tktk-microlesson-01/README.md) | -- | -- | tktk skills covered                     |
-| [tktk Microlesson Name](./tktk-microlesson-02/README.md) | -- | -- | tktk skills covered                     |
-| [tktk Microlesson Name](./tktk-microlesson-03/README.md) | -- | -- | tktk skills covered                     |
-| **Total content**                                        | -- | -- |                                         |
-
-## Level Up content
-
-| Lesson | Video Time | Video | Skills |
-| ------ |:----------:|:-----:| ------ |
-| [tktk Microlesson Name](./tktk-microlesson-04/README.md) | -- | -- | tktk skills covered                     |
-| **Total Level Up content**                               | -- | -- |                                         |
+| [Starting with Auth Boilerplate](./starting-with-auth-boilerplate/README.md) | -- | -- | Bootstrapping an app with our JWT auth template                  |
+| [Setting Up the SQL Database](./setting-up-the-sql-database/README.md) | -- | -- | Creating SQL databases and tables with foreign keys                     |
+| [SQL Queries for RESTful Routes](./sql-queries-for-restful-routes/README.md) | -- | -- | Connecting RESTful routes with appropriate SQL queries                    |
+| [Hoots and Comments Routes](./hoots-and-comments-routes/README.md) | -- | -- | Creating a Flask API with authentication, related data, and SQL queries                    |
 
 ## References
 
