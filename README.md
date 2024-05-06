@@ -1,4 +1,4 @@
-# ![Flask API Related Data](./assets/tktk-hero.png)
+# ![Flask API Related Data](./assets/hero.png)
 
 ## About
 
