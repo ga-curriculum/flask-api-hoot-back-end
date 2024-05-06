@@ -17,8 +17,7 @@ The social media application we're building, Hoot, has the basic functionality e
 
 To support this functionality, Hoot has the following database structure (Note that, to avoid re-using the word "post" in confusing ways, we've renamed the basic blog post of the app to a "hoot"):
 
-TKTK- cut Profile, make this SQL-y.
-![](assets/schema-erd.png)
+![ERD](./assets/erd.png)
 
 This means setting up some more SQL tables, this time with foreign keys!
 
@@ -79,15 +78,14 @@ You should see 0 hoots remaining in the database, since their author was deleted
 
 Comments will work very similarly, so try taking a guess at the SQL statement required to create this table. Don't forget our CASCADE decision to delete comments whenever a hoot is deleted.
 
-<details>
-    <summary>Reveal SQL</summary>
-    CREATE TABLE comments (
+```SQL
+CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     author INTEGER REFERENCES users(id) ON DELETE CASCADE,
     hoot INTEGER REFERENCES hoots(id) ON DELETE CASCADE,
     text VARCHAR(280)
-    );
-</details>
+);
+```
 
 Try out some SQL queries testing the connections and cascading between them. 
 

@@ -1,4 +1,4 @@
-# ![Flask API Related Data](./assets/hero.png)
+# ![Flask API - Hoot Back-End](./assets/hero.png)
 
 ## About
 
