@@ -57,7 +57,7 @@ def get_db_connection():
 
 Now that we're building a larger application that will have many routes, let's start the process of modularizing our code by splitting off the authentication functionality into a separate file.
 
-We'll leverage Flask's [blueprints pattern](https://flask.palletsprojects.com/en/1.1.x/blueprints/) and create a Blueprint for authentication routes.
+We'll leverage Flask's [blueprints pattern](https://flask.palletsprojects.com/en/2.3.x/blueprints/) and create a Blueprint for authentication routes.
 
 Create a new file called `auth_blueprint.py` and start with the minimum two lines required to import Blueprint and create one:
 

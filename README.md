@@ -15,7 +15,6 @@ In this lesson, we'll put it all together by creating a REST API with Flask that
 | Lesson | Video Time | Video | Skills |
 | ------ |:----------:|:-----:| ------ |
 | [Setup](./setup/README.md)                               | -- | -- | Setting up the development environment  |
-| [Concepts](./concepts/README.md)                         | -- | -- | tktk skills covered                     |
 | [Starting with Auth Boilerplate](./starting-with-auth-boilerplate/README.md) | -- | -- | Bootstrapping an app with our JWT auth template                  |
 | [Setting Up the SQL Database](./setting-up-the-sql-database/README.md) | -- | -- | Creating SQL databases and tables with foreign keys                     |
 | [SQL Queries for RESTful Routes](./sql-queries-for-restful-routes/README.md) | -- | -- | Connecting RESTful routes with appropriate SQL queries                    |
