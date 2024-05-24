@@ -17,6 +17,8 @@ We'll be building functionality to support the following user stories:
 
 To support this functionality, Hoot has the following database structure (Note that, to avoid re-using the word "post" in confusing ways, we've renamed the basic blog post of the app to a "hoot"):
 
+![ERD](./assets/erd.png)
+
 This means setting up some more SQL tables, this time with foreign keys!
 
 This also means considering: what do we want to happen to child records when the parent is deleted: should a user's posts be deleted along with the user, or should they remain?

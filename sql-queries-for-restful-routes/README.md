@@ -1,4 +1,4 @@
-# ![Express API - Hoot Back-End - Setting the Stage](./assets/hero.png)
+# ![Express API - Hoot Back-End - SQL Queries for RESTful Routes](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to associate SQL queries to each of the RESTful routes in the Hoot application.
 
