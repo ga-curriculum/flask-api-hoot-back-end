@@ -1,12 +1,12 @@
-# ![[tktk Module Name] - tktk Microlesson Name](./assets/hero.png)
+# ![Flask API - Hoot Back-End - Setting Up the SQL Database](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to tktk
 
-## The Full Database
+## User stories
 
 The social media application we're building, Hoot, has the basic functionality expected of most social sites. 
 
-### User Stories
+We'll be building functionality to support the following user stories:
 
 - AAU, I should be able to create a blog post.
 - AAU, I should be able to see a list of all blogs.
@@ -17,16 +17,13 @@ The social media application we're building, Hoot, has the basic functionality e
 
 To support this functionality, Hoot has the following database structure (Note that, to avoid re-using the word "post" in confusing ways, we've renamed the basic blog post of the app to a "hoot"):
 
-TKTK- cut Profile, make this SQL-y.
-![](assets/schema-erd.png)
-
 This means setting up some more SQL tables, this time with foreign keys!
 
 This also means considering: what do we want to happen to child records when the parent is deleted: should a user's posts be deleted along with the user, or should they remain?
 
 Different applications handle this differently, but for our application, we'll want to CASCADE the deletion of a user to include all their posts, and all comments associated with their posts. No posts by `[deleted]` in our app!
 
-## The Hoots Table
+## Hoots table
 
 Let's start by creating the hoots table and associating its author field with Users:
 
@@ -75,19 +72,18 @@ SELECT * FROM hoots;
 
 You should see 0 hoots remaining in the database, since their author was deleted.
 
-## The Comments Table
+## Comments table
 
 Comments will work very similarly, so try taking a guess at the SQL statement required to create this table. Don't forget our CASCADE decision to delete comments whenever a hoot is deleted.
 
-<details>
-    <summary>Reveal SQL</summary>
-    CREATE TABLE comments (
-    id SERIAL PRIMARY KEY,
-    author INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    hoot INTEGER REFERENCES hoots(id) ON DELETE CASCADE,
-    text VARCHAR(280)
-    );
-</details>
+```sql
+CREATE TABLE comments (
+id SERIAL PRIMARY KEY,
+author INTEGER REFERENCES users(id) ON DELETE CASCADE,
+hoot INTEGER REFERENCES hoots(id) ON DELETE CASCADE,
+text VARCHAR(280)
+);
+```
 
 Try out some SQL queries testing the connections and cascading between them. 
 

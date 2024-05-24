@@ -1,14 +1,14 @@
-# ![Flask API Related Data - Setup](./assets/hero.png)
+# ![Flask API - Hoot Back-End - Setup](./assets/hero.png)
 
 ## Setup
 
-Open your Terminal application and navigate to your **`~/code/ga/lectures`** directory:
+Open your Terminal application and navigate to your `~/code/ga/lectures` directory:
 
 ```bash
 cd ~/code/ga/lectures
 ```
 
-Make a new directory called **`flask-api-related-data`**, then enter this directory:
+Make a new directory called `flask-api-related-data`, then enter this directory:
 
 ```bash
 mkdir flask-api-related-data
