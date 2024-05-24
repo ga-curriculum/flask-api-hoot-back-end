@@ -1,4 +1,4 @@
-# ![Flask API - Hoot Back-End - Comments Blueprint](./assets/hero.png)
+# ![Flask API - Hoot Back-End - Comment Blueprint](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to implement full RESTful routes with related data in Flask
 
