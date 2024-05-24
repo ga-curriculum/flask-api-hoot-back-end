@@ -1,12 +1,12 @@
-# ![Flask API Related Data - Setting Up the SQL Database](./assets/hero.png)
+# ![Flask API - Hoot Back-End - Setting Up the SQL Database](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to tktk
 
-## The Full Database
+## User stories
 
 The social media application we're building, Hoot, has the basic functionality expected of most social sites. 
 
-### User Stories
+We'll be building functionality to support the following user stories:
 
 - AAU, I should be able to create a blog post.
 - AAU, I should be able to see a list of all blogs.
@@ -25,7 +25,7 @@ This also means considering: what do we want to happen to child records when the
 
 Different applications handle this differently, but for our application, we'll want to CASCADE the deletion of a user to include all their posts, and all comments associated with their posts. No posts by `[deleted]` in our app!
 
-## The Hoots Table
+## Hoots table
 
 Let's start by creating the hoots table and associating its author field with Users:
 
@@ -74,16 +74,16 @@ SELECT * FROM hoots;
 
 You should see 0 hoots remaining in the database, since their author was deleted.
 
-## The Comments Table
+## Comments table
 
 Comments will work very similarly, so try taking a guess at the SQL statement required to create this table. Don't forget our CASCADE decision to delete comments whenever a hoot is deleted.
 
-```SQL
+```sql
 CREATE TABLE comments (
-    id SERIAL PRIMARY KEY,
-    author INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    hoot INTEGER REFERENCES hoots(id) ON DELETE CASCADE,
-    text VARCHAR(280)
+id SERIAL PRIMARY KEY,
+author INTEGER REFERENCES users(id) ON DELETE CASCADE,
+hoot INTEGER REFERENCES hoots(id) ON DELETE CASCADE,
+text VARCHAR(280)
 );
 ```
 

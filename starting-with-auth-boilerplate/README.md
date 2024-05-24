@@ -1,4 +1,4 @@
-# ![Flask API Related Data - Starting with Auth Boilerplate](./assets/hero.png)
+# ![Flask API - Hoot Back-End - Starting with Auth Boilerplate](./assets/hero.png)
 
 **Learning objective:** By the end of this lesson, students will be able to bootstrap Flask applications with their authentication jwt starter code.
 
@@ -12,15 +12,12 @@ For now, modify the `app.py` in your app to match the one provided in the templa
 
 Think: what else do we need to copy over to make this application run the same as our previous app?
 
-<details>
-    <summary>Reveal the next steps</summary>
-    Create a .env file with the POSTGRES connection information and JWT_SECRET
-    Create a new database for this project
-    Create the users table
-    Copy over the auth-middleware.py file
-</details>
+- Create a `.env` file with a `POSTGRES_USERNAME`, `POSTGRES_PASSWORD` and `JWT_SECRET`
+- Create a new database for this project
+- Create the users table
+- Copy over the `auth-middleware.py` file
 
-The .env file should be a simple copy-paste from the working version on your machine, but just in case you need it:
+The `.env` file should be a simple copy-paste from the working version on your machine, but just in case you need it:
 
 ```
 JWT_SECRET = <your-personal-secret-string>
