@@ -2,7 +2,7 @@
 
 ## About
 
-In this lesson, we'll put it all together by creating a REST API with Flask that authenticates users with JWTs and associates data across multiple tables.
+In this module, students will build a backend for the Hoot blogging platform using Flask, PostgreSQL, and JWT authentication. They will create a RESTful API that supports full CRUD functionality for blog posts and comments. Throughout the module, students will focus on designing RESTful routes, managing data relationships, and testing API endpoints with tools like Postman. This practical experience will equip students with essential backend development skills.
 
 ## Prerequisites
 
@@ -26,14 +26,14 @@ In this lesson, we'll put it all together by creating a REST API with Flask that
 | [Update Hoot](./update-hoot/README.md) | -- | -- | Create a `PUT` route to update a specific hoot blog post in the database by id |
 | [Delete Hoot](./delete-hoot/README.md) | -- | -- | Create a `DELETE` route to delete a specific hoot blog post from the database by id |
 | [Comments Blueprint](./comment-blueprint/README.md) | -- | -- | Creating a resource blueprint |
-| [Create Comment](./create-comment/README.md) | -- | -- | Create a `POST` request to embed a comment document in a specific hoot |
+| [Create Comment](./create-comment/README.md) | -- | -- | Create a `POST` request to create a comment associated with a specific hoot |
 
 ## Level Up content
 
 | Lesson                                       | Skills                                                      |
 | -------------------------------------------- | ----------------------------------------------------------- |
-| [Update Comment](./update-comment/README.md) | Create a `PUT` route to update an embedded comment by id    |
-| [Delete Comment](./delete-comment/README.md) | Create a `DELETE` route to delete an embedded comment by id |
+| [Update Comment](./update-comment/README.md) | Create a `PUT` route to update a comment by id    |
+| [Delete Comment](./delete-comment/README.md) | Create a `DELETE` route to delete a comment by id |
 
 ## References
 
