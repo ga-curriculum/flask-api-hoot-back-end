@@ -83,4 +83,14 @@ def update_hoot(hoot_id):
 
 ## Test the route in Postman
 
-Now that we have finished the route, let's test it with Postman. We'll do this by sending a `PUT` request to `tktk`.
+Now that we have the route, let's test it with Postman. 
+
+We'll do this by sending a `PUT` request to the following URL:
+
+```plaintext
+http://127.0.0.1:5000/hoots/2
+```
+
+> 💡 Be sure to update this with a hoot `id` value that exists in your database!
+
+You should see the updated hoot as a response.

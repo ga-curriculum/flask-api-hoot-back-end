@@ -27,13 +27,23 @@ comments_blueprint = Blueprint('comments_blueprint', __name__)
 # Routes here
 ```
 
-Add the following to `app.py`:
+> 💡 Note the import of `token_required` for protected routes, such as creating a comment or editing/deleting one's own comments.
+
+Add the following import to `app.py`:
 
 ```python
 # add to list of imports
+from auth_blueprint import authentication_blueprint
+from hoots_blueprint import hoots_blueprint
+# New import:
 from comments_blueprint import comments_blueprint
-
-app.register_blueprint(comments_blueprint)
 ```
 
-> 💡 Note the import of `token_required` for protected routes, such as creating a comment or editing/deleting one's own comments.
+And register the new blueprint:
+
+```python
+app.register_blueprint(hoots_blueprint)
+app.register_blueprint(authentication_blueprint)
+# Register new blueprint:
+app.register_blueprint(comments_blueprint)
+```

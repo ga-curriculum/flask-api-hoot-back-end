@@ -4,13 +4,13 @@
 
 ## Overview
 
-In this section, we will make a route to create a new comment. This route will be a `PUT` request to `/comments/<comment_id>`, and will return a JSON response with the new comment. The purpose of this route is to handle data that is sent along with a **form submission**.
+In this section, we will make a route to create a new comment. This route will be a `PUT` request to `/hoots/<hoot_id>/comments/<comment_id>`, and will return a JSON response with the new comment. The purpose of this route is to handle data that is sent along with a **form submission**.
 
 We will be following these specs when building the route:
 
 - CRUD Action: CREATE
 - Method: `PUT`
-- Path: `/comments/<comment_id>`
+- Path: `/hoots/<hoot_id>/comments/<comment_id>`
 - Response: JSON
 - Success Status Code: `201` Created
 - Success Response Body: A new hoot object
@@ -19,10 +19,10 @@ We will be following these specs when building the route:
 
 ## Define the route
 
-Next we'll define a route that listens for `PUT` requests on `/comments/<comment_id>`:
+Next we'll define a route that listens for `PUT` requests on `/hoots/<hoot_id>/comments/<comment_id>`:
 
 ```
-PUT /comments/<comment_id>
+PUT /hoots/<hoot_id>/comments/<comment_id>
 ```
 
 We'll make use of our `@token_required` decorator, as only a logged in user should be able to update a comment.
@@ -30,7 +30,7 @@ We'll make use of our `@token_required` decorator, as only a logged in user shou
 Add the following to `comments_blueprint.py`:
 
 ```python
-@comments_blueprint.route('/comments/<comment_id>', methods=['PUT'])
+@comments_blueprint.route('/hoots/<hoot_id>/comments/<comment_id>', methods=['PUT'])
 @token_required
 ```
 
@@ -59,9 +59,9 @@ This will require **two** separate queries:
 Add the following to `comments_blueprint.py`:
 
 ```python
-@comments_blueprint.route('/comments/<comment_id>', methods=['PUT'])
+@comments_blueprint.route('/hoots/<hoot_id>/comments/<comment_id>', methods=['PUT'])
 @token_required
-def update_comment(comment_id):
+def update_comment(hoot_id, comment_id):
     try:
         updated_comment_data = request.json
         connection = get_db_connection()
@@ -80,4 +80,37 @@ def update_comment(comment_id):
         return jsonify({"comment": updated_comment}), 201
     except Exception as error:
         return jsonify({"error": str(error)}), 500
+```
+
+## Test the route in Postman
+
+Now that we have the route, let's test it with Postman. 
+
+We'll do this by sending a `PUT` request to the following URL:
+
+```plaintext
+http://127.0.0.1:5000/hoots/4/comments/1
+```
+
+> 💡 Be sure to update this with hoot and comment `id` values that exists in your database!
+
+The body of your request should look like the following:
+
+```json
+{
+    "text": "Updated comment text"
+}
+```
+
+If the request is successful, you should see a response like the one below:
+
+```json
+{
+    "comment": {
+        "author": 4,
+        "hoot": 4,
+        "id": 1,
+        "text": "Updated comment text"
+    }
+}
 ```

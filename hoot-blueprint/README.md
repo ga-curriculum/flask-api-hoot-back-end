@@ -12,6 +12,8 @@ Create a file named `hoots_blueprint.py` and set it up similar to our starting p
 touch hoots_blueprint.py
 ```
 
+Add the following to `hoots_blueprint.py`:
+
 ```python
 from flask import Blueprint, jsonify, request, g
 from db_helpers import get_db_connection
@@ -21,11 +23,11 @@ from auth_middleware import token_required
 hoots_blueprint = Blueprint('hoots_blueprint', __name__)
 ```
 
-Note the import of `token_required` for routes that will require a user, such as creating a hoot or editing/deleting one's own hoots.
+>💡 Note the import of `token_required` for routes that will require a user, such as creating a hoot or editing/deleting one's own hoots.
 
-Let's create a simple placeholder for the index, register this blueprint in the `app.py`, and test it out:
+Let's create a placeholder for the index.
 
-In `hoots_blueprint.py`:
+Add the following route to `hoots_blueprint.py`:
 
 ```python
 @hoots_blueprint.route('/hoots', methods=['GET'])
@@ -33,13 +35,27 @@ def hoots_index():
     return jsonify({"message": "hoots index lives here"})
 ```
 
-In `app.py`:
+Next, we'll register this blueprint in the `app.py`.
+
+First, add the following import to `app.py`:
 
 ```python
-# add to list of imports
+# Add to list of imports
 from hoots_blueprint import hoots_blueprint
+```
 
+And register the blueprint:
+
+```python
 app.register_blueprint(hoots_blueprint)
 ```
 
-Send a GET request in Postman to `localhost:5000/hoots` to receive the expected response.
+Using Postman or your browser, send a `GET` request to `http://127.0.0.1:5000/hoots`.
+
+You should see the following response:
+
+```json
+{
+    "message": "hoots index lives here"
+}
+```

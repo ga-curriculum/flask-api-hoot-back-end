@@ -31,6 +31,8 @@ Add the following to `hoots_blueprint.py`:
 @hoots_blueprint.route('/hoots', methods=['GET'])
 ```
 
+> 🚨 If you recall, we added an example `hoots_index` route in a previous lesson. Be sure to remove or update that existing route while following these steps.
+
 ## Code the controller function
 
 Let's breakdown what we'll accomplish inside our controller function.
@@ -75,7 +77,15 @@ def hoots_index():
         return jsonify({"error": str(error)}), 500
 ```
 
-If we test this in Postman, we *do* get a response! But check out what happens if you query for a hoot with multiple comments: you end up with a list of hoots with duplicates!
+In Postman, make a `GET` request to the following:
+
+```plaintext
+http://127.0.0.1:5000/hoots
+```
+
+When we test this in Postman, we *do* get a response! 
+
+But check out what happens if you query for a hoot with multiple comments: you end up with a list of hoots with duplicates!
 
 This is because the SQL response sends a new row for each individual comment. We'll need logic to zip these together into the more expected format: `comments` should be a list within the `hoot` object, and it should contain all comments associated with that hoot, like so:
 
@@ -88,6 +98,8 @@ sampleHoot = {
     ]
 }
 ```
+
+> 💡 At this point, you may see an empty comments array if you did not use SQL commands to create comments previously.
 
 To accomplish this, we'll write a helper function named `conslidated_comments_in_hoots` that accepts the SQL response dictionaries as input, and returns the expected format of nested comments within hoots. Fortunately, we're back in vanilla python world for this problem, but this will be a tricky algorithm to write! 
 
@@ -132,9 +144,10 @@ def consolidate_comments_in_hoots(hoots_with_comments):
     return consolidated_hoots
 ```
 
-Next, add the following import to `hoots_blueprint.py`:
+Next, in `hoots_blueprint.py`, update the following import with `consolidate_comments_in_hoots`:
 
 ```python
+# hoots_blueprint.py
 from db_helpers import get_db_connection, consolidate_comments_in_hoots
 ```
 

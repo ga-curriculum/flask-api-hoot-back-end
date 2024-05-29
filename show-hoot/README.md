@@ -82,18 +82,28 @@ def show_hoot(hoot_id):
 
 ## Test the route in Postman
 
-Now that we have finished the route let's test it with Postman. We'll do this by sending a `GET` request to `tktk`.
+Now that we have the route let's test it with Postman. 
 
+We'll do this by sending a `GET` request to following URL:
 
+```plaintext
+http://127.0.0.1:5000/hoots/2
+```
 
+> 💡 Be sure to update this with a hoot `id` value that exists in your database!
 
+If the request is successful, you should see a response like the following:
 
-
-
-
-
-
-
-
-
-
+```json
+{
+    "hoot": {
+        "author_username": "cool-username",
+        "category": "news",
+        "comments": [],
+        "hoot_author_id": 4,
+        "id": 2,
+        "text": "Lorem ipsum",
+        "title": "Big News"
+    }
+}
+```

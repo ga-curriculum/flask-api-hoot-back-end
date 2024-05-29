@@ -82,10 +82,33 @@ def create_comment(hoot_id):
 
 ## Test the route in Postman
 
-Create a new request called **Create Comment** and set the request type to `POST`.
+Now that we have the route, let's test it with Postman. 
 
-> ❗ This request requires authentication, so ensure the **Authorization** tab is configured correctly.
+We'll do this by sending a `POST` request to the following URL:
 
-Your Postman URL should look something like this:
+```plaintext
+http://127.0.0.1:5000/hoots/4/comments
+```
 
-tktk
+> 💡 Be sure to update this with a hoot `id` value that exists in your database!
+
+The body of your request should look like the following:
+
+```json
+{
+    "text": "Comment text"
+}
+```
+
+If the request is successful, you should see a response like the one below:
+
+```json
+{
+    "comment": {
+        "author": 4,
+        "hoot": 4,
+        "id": 1,
+        "text": "Comment text"
+    }
+}
+```
