@@ -75,7 +75,6 @@ def delete_comment(hoot_id, comment_id):
         return jsonify({"error": str(error)}), 500
 ```
 
-
 ## Test the route in Postman
 
 Now that we have the route, let's test it with Postman. 
