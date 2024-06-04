@@ -23,7 +23,7 @@ from auth_middleware import token_required
 hoots_blueprint = Blueprint('hoots_blueprint', __name__)
 ```
 
->💡 Note the import of `token_required` for routes that will require a user, such as creating a hoot or editing/deleting one's own hoots.
+> 💡 Note the import of `token_required` for routes that will require a user, such as creating a hoot or editing/deleting one's own hoots.
 
 Let's create a placeholder for the index.
 
@@ -56,6 +56,6 @@ You should see the following response:
 
 ```json
 {
-    "message": "hoots index lives here"
+  "message": "hoots index lives here"
 }
 ```

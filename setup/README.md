@@ -125,7 +125,7 @@ exit
 
 ## Creating the SQL Database for this project
 
-Let's take a moment to setup our initial database. 
+Let's take a moment to setup our initial database.
 
 We'll need to execute SQL commands to create a `flask_hoot` database and `users` table.
 

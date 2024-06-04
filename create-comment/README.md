@@ -43,7 +43,7 @@ Let's breakdown what we'll accomplish inside our controller function.
 Our function will use the connection `cursor` to `execute` the following SQL query:
 
 ```sql
-INSERT INTO comments (hoot, author, text) 
+INSERT INTO comments (hoot, author, text)
 VALUES (%s, %s, %s)
 RETURNING *
 ```
@@ -66,10 +66,10 @@ def create_comment(hoot_id):
         cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
         cursor.execute("""
-                        INSERT INTO comments (hoot, author, text) 
+                        INSERT INTO comments (hoot, author, text)
                         VALUES (%s, %s, %s)
                         RETURNING *
-                        """, 
+                        """,
                         (hoot_id, new_comment_data['author'], new_comment_data['text'])
         )
         created_comment = cursor.fetchone()
@@ -82,7 +82,7 @@ def create_comment(hoot_id):
 
 ## Test the route in Postman
 
-Now that we have the route, let's test it with Postman. 
+Now that we have the route, let's test it with Postman.
 
 We'll do this by sending a `POST` request to the following URL:
 
@@ -96,7 +96,7 @@ The body of your request should look like the following:
 
 ```json
 {
-    "text": "Comment text"
+  "text": "Comment text"
 }
 ```
 
@@ -104,11 +104,11 @@ If the request is successful, you should see a response like the one below:
 
 ```json
 {
-    "comment": {
-        "author": 4,
-        "hoot": 4,
-        "id": 1,
-        "text": "Comment text"
-    }
+  "comment": {
+    "author": 4,
+    "hoot": 4,
+    "id": 1,
+    "text": "Comment text"
+  }
 }
 ```

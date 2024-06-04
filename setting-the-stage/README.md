@@ -8,7 +8,7 @@ In this module, we'll build an API back-end for a full-stack blogging applicatio
 
 Within our Flask API, we'll implement full CRUD functionality on a blog post resource called `hoots`, as well as `create` functionality on a `comments` resource.
 
-Our Flask API will make use of much of the code in the [Flask API JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/flask-jwt-auth-template.git), with a few caveats. 
+Our Flask API will make use of much of the code in the [Flask API JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/flask-jwt-auth-template.git), with a few caveats.
 
 To demonstrate the modularity of Flask, we'll be expanding upon the code found in the Flask API JWT Auth Template. To better understand these changes, we'll be pulling code snippets from the template, rather than cloning the template directly.
 
@@ -31,9 +31,9 @@ Take a look at the ERD below to get a sense of the data we'll be working with:
 
 ![ERD](./assets/erd.png)
 
-After reviewing the diagram above, consider some of the decisions that must be made when these particular data structures are applied to a relational database. For example, what should happen to child records when the parent is deleted? Should a user's posts be deleted along with the user, or should they remain? 
+After reviewing the diagram above, consider some of the decisions that must be made when these particular data structures are applied to a relational database. For example, what should happen to child records when the parent is deleted? Should a user's posts be deleted along with the user, or should they remain?
 
-Different applications handle this differently, but for our application, we'll want to `CASCADE` the deletion of a user to include all their posts, and all comments associated with their posts. 
+Different applications handle this differently, but for our application, we'll want to `CASCADE` the deletion of a user to include all their posts, and all comments associated with their posts.
 
 > 😎 No posts by `[deleted]` in our app!
 
@@ -41,14 +41,14 @@ Different applications handle this differently, but for our application, we'll w
 
 Below you can see a chart outlining the RESTful routes required for this application:
 
-| HTTP Method | Controller | Response | URI | Use Case |
-| ----------- | ------------- | -------- | ----------------------- | ----------------- |
-| POST | `create_hoot` | 200 | `/hoots` | Create a hoot |
-| GET | `hoots_index` | 200 | `/hoots` | List hoots |
-| GET | `show_hoot` | 200 | `/hoots/<hoot_id>` | Get a single hoot |
-| PUT | `update_hoot` | 200 | `/hoots/<hoot_id>` | Update a hoot |
-| DELETE | `delete_hoot` | 200 | `/hoots/<hoot_id>` | Delete a hoot |
-| POST | `create_comment` | 200 | `/hoots/<hoot_id>/comments` | Create a comment |
+| HTTP Method | Controller       | Response | URI                         | Use Case          |
+| ----------- | ---------------- | -------- | --------------------------- | ----------------- |
+| POST        | `create_hoot`    | 200      | `/hoots`                    | Create a hoot     |
+| GET         | `hoots_index`    | 200      | `/hoots`                    | List hoots        |
+| GET         | `show_hoot`      | 200      | `/hoots/<hoot_id>`          | Get a single hoot |
+| PUT         | `update_hoot`    | 200      | `/hoots/<hoot_id>`          | Update a hoot     |
+| DELETE      | `delete_hoot`    | 200      | `/hoots/<hoot_id>`          | Delete a hoot     |
+| POST        | `create_comment` | 200      | `/hoots/<hoot_id>/comments` | Create a comment  |
 
 > 💡 When analyzing the RESTful routes in our application, think about what associated data might required for each query: the index page, for example, would certainly want the username of authors for each Hoot. JOINs will be very common in this app.
 
@@ -58,7 +58,7 @@ When using PostgreSQL, it can be helpful to give some thought to the necessary S
 
 Below, you'll find the SQL queries that we'll use in our Flask app. If you wish, you can test these out in your `postgres` shell. Doing so can help isolate any problems with specific SQL before they are tied to application logic, and can make writing the routes much easier.
 
-Review the sample queries below to get a better sense of what we'll implment in our application:
+Review the sample queries below to get a better sense of what we'll implement in our application:
 
 ### Create hoot
 
@@ -69,10 +69,10 @@ INSERT INTO hoots (author, title, text, category) VALUES (2, 'testing hoot creat
 ### Index hoots
 
 ```sql
-SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username 
-FROM hoots h 
-INNER JOIN users u_hoot ON h.author = u_hoot.id 
-LEFT JOIN comments c ON h.id = c.hoot 
+SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username
+FROM hoots h
+INNER JOIN users u_hoot ON h.author = u_hoot.id
+LEFT JOIN comments c ON h.id = c.hoot
 LEFT JOIN users u_comment ON c.author = u_comment.id;
 ```
 
@@ -81,10 +81,10 @@ LEFT JOIN users u_comment ON c.author = u_comment.id;
 ### Show hoot
 
 ```sql
-SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username 
-FROM hoots h 
-INNER JOIN users u_hoot ON h.author = u_hoot.id 
-LEFT JOIN comments c ON h.id = c.hoot 
+SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username
+FROM hoots h
+INNER JOIN users u_hoot ON h.author = u_hoot.id
+LEFT JOIN comments c ON h.id = c.hoot
 LEFT JOIN users u_comment ON c.author = u_comment.id
 WHERE h.id = 4;
 ```

@@ -50,9 +50,9 @@ This query updates the text of an existing comment in the `comments` table. It s
 
 As we saw when updating a hoot, we'll need to determine whether the user making the request is, in fact, the comment's original creator.
 
-This will require **two** separate queries: 
+This will require **two** separate queries:
 
-- One to get the commment from the database and check who the author is,
+- One to get the comment from the database and check who the author is,
 
 - And the second to actually update the comment.
 
@@ -72,7 +72,7 @@ def update_comment(hoot_id, comment_id):
             return jsonify({"error": "Comment not found"}), 404
         if comment_to_update["author"] != g.user["id"]:
             return jsonify({"error": "Unauthorized"}), 401
-        cursor.execute("UPDATE comments SET text = %s WHERE id = %s RETURNING *", 
+        cursor.execute("UPDATE comments SET text = %s WHERE id = %s RETURNING *",
                        (updated_comment_data["text"], comment_id))
         updated_comment = cursor.fetchone()
         connection.commit()
@@ -84,7 +84,7 @@ def update_comment(hoot_id, comment_id):
 
 ## Test the route in Postman
 
-Now that we have the route, let's test it with Postman. 
+Now that we have the route, let's test it with Postman.
 
 We'll do this by sending a `PUT` request to the following URL:
 
@@ -98,7 +98,7 @@ The body of your request should look like the following:
 
 ```json
 {
-    "text": "Updated comment text"
+  "text": "Updated comment text"
 }
 ```
 
@@ -106,11 +106,11 @@ If the request is successful, you should see a response like the one below:
 
 ```json
 {
-    "comment": {
-        "author": 4,
-        "hoot": 4,
-        "id": 1,
-        "text": "Updated comment text"
-    }
+  "comment": {
+    "author": 4,
+    "hoot": 4,
+    "id": 1,
+    "text": "Updated comment text"
+  }
 }
 ```

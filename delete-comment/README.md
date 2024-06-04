@@ -1,6 +1,6 @@
 # ![Flask API - Hoot Back-End - Delete Comment](./assets/hero.png)
 
-**Learning objective:** By the end of this lesson, students will be able build a route that deletes embedded subdocuments inside a single hoot.
+**Learning objective:** By the end of this lesson, students will be able build a route that deletes embedded sub-documents inside a single hoot.
 
 ## Overview
 
@@ -77,7 +77,7 @@ def delete_comment(hoot_id, comment_id):
 
 ## Test the route in Postman
 
-Now that we have the route, let's test it with Postman. 
+Now that we have the route, let's test it with Postman.
 
 We'll do this by sending a `DELETE` request to the following URL:
 
@@ -91,6 +91,6 @@ If the request is successful, you should see a response like the one below:
 
 ```json
 {
-    "message": "Comment deleted successfully"
+  "message": "Comment deleted successfully"
 }
 ```

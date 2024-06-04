@@ -25,7 +25,7 @@ Our route will listen for `PUT` requests on `'/hoots/<hoot_id>'`:
 PUT /hoots/<hoot_id>
 ```
 
-We'll make use of our `@token_required` decorator, as only a logged in user should be able to update a hoot. 
+We'll make use of our `@token_required` decorator, as only a logged in user should be able to update a hoot.
 
 Add the following:
 
@@ -48,7 +48,7 @@ UPDATE hoots SET title = %s, text = %s, category = %s WHERE hoots.id = %s RETURN
 
 The new twist in this route will be determining whether the user making the request is, in fact, the hoot's original creator!
 
-This will require **two** separate queries: 
+This will require **two** separate queries:
 
 - One to get the hoot from the database and check who the author is,
 
@@ -71,7 +71,7 @@ def update_hoot(hoot_id):
         connection.commit()
         if hoot_to_update["author"] is not g.user["id"]:
             return jsonify({"error": "Unauthorized"}), 401
-        cursor.execute("UPDATE hoots SET title = %s, text = %s, category = %s WHERE hoots.id = %s RETURNING *", 
+        cursor.execute("UPDATE hoots SET title = %s, text = %s, category = %s WHERE hoots.id = %s RETURNING *",
                         (updated_hoot_data["title"], updated_hoot_data["text"], updated_hoot_data["category"], hoot_id))
         updated_hoot = cursor.fetchone()
         connection.commit()
@@ -83,7 +83,7 @@ def update_hoot(hoot_id):
 
 ## Test the route in Postman
 
-Now that we have the route, let's test it with Postman. 
+Now that we have the route, let's test it with Postman.
 
 We'll do this by sending a `PUT` request to the following URL:
 

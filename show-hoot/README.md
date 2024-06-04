@@ -31,7 +31,7 @@ Add the following to `hoots_blueprint.py`:
 @hoots_blueprint.route('/hoots/<hoot_id>', methods=['GET'])
 ```
 
-Note, for this route, we'll have to *parameterize* the query. The term *parameterize* in the context of a SQL query refers to safely inserting the value of `hoot_id` into the SQL query using placeholders, which helps prevent SQL injection attacks. When using parameterized queries, the placeholder `%s` is used in the SQL statement and the actual value is provided as a separate argument to the `cursor.execute` method.
+Note, for this route, we'll have to _parameterize_ the query. The term _parameterize_ in the context of a SQL query refers to safely inserting the value of `hoot_id` into the SQL query using placeholders, which helps prevent SQL injection attacks. When using parameterized queries, the placeholder `%s` is used in the SQL statement and the actual value is provided as a separate argument to the `cursor.execute` method.
 
 ## Code the controller function
 
@@ -40,10 +40,10 @@ Let's breakdown what we'll accomplish inside our controller function.
 Our function will use the connection `cursor` to `execute` the following SQL query:
 
 ```sql
-SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username 
-        FROM hoots h 
-        INNER JOIN users u_hoot ON h.author = u_hoot.id 
-        LEFT JOIN comments c ON h.id = c.hoot 
+SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username
+        FROM hoots h
+        INNER JOIN users u_hoot ON h.author = u_hoot.id
+        LEFT JOIN comments c ON h.id = c.hoot
         LEFT JOIN users u_comment ON c.author = u_comment.id
         WHERE h.id = %s;"""
 ```
@@ -61,12 +61,12 @@ def show_hoot(hoot_id):
         connection = get_db_connection()
         cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         cursor.execute("""
-            SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username 
-            FROM hoots h 
-            INNER JOIN users u_hoot ON h.author = u_hoot.id 
-            LEFT JOIN comments c ON h.id = c.hoot 
+            SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username
+            FROM hoots h
+            INNER JOIN users u_hoot ON h.author = u_hoot.id
+            LEFT JOIN comments c ON h.id = c.hoot
             LEFT JOIN users u_comment ON c.author = u_comment.id
-            WHERE h.id = %s;""", 
+            WHERE h.id = %s;""",
             (hoot_id,))
         unprocessed_hoot = cursor.fetchall()
         if unprocessed_hoot is not None :
@@ -82,7 +82,7 @@ def show_hoot(hoot_id):
 
 ## Test the route in Postman
 
-Now that we have the route let's test it with Postman. 
+Now that we have the route let's test it with Postman.
 
 We'll do this by sending a `GET` request to following URL:
 
@@ -96,14 +96,14 @@ If the request is successful, you should see a response like the following:
 
 ```json
 {
-    "hoot": {
-        "author_username": "cool-username",
-        "category": "news",
-        "comments": [],
-        "hoot_author_id": 4,
-        "id": 2,
-        "text": "Lorem ipsum",
-        "title": "Big News"
-    }
+  "hoot": {
+    "author_username": "cool-username",
+    "category": "news",
+    "comments": [],
+    "hoot_author_id": 4,
+    "id": 2,
+    "text": "Lorem ipsum",
+    "title": "Big News"
+  }
 }
 ```

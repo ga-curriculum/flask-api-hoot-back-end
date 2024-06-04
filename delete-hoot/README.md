@@ -25,7 +25,7 @@ Our route will listen for `DELETE` requests on `/hoots/<hoot_id>`:
 DELETE /hoots/<hoot_id>
 ```
 
-We'll make use of our `@token_required` decorator, as only a logged in user should be able to delete a hoot. 
+We'll make use of our `@token_required` decorator, as only a logged in user should be able to delete a hoot.
 
 Add the following:
 
@@ -74,7 +74,7 @@ def delete_hoot(hoot_id):
 
 ## Test the route in Postman
 
-Now that we have the route let's test it with Postman. 
+Now that we have the route let's test it with Postman.
 
 We'll do this by sending a `DELETE` request to the following URL:
 
@@ -88,6 +88,6 @@ If the request is successful, you should see a response like the following:
 
 ```json
 {
-    "message": "hoot deleted successfully"
+  "message": "hoot deleted successfully"
 }
 ```

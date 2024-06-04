@@ -34,7 +34,7 @@ CREATE TABLE hoots (
 
 ## Querying the table
 
-Assuming you've created a user with the id of `1` during your testing of the application, let's run some test queries to ensure things are set up correctly. We'll create a sample hoot associated with the first user to signup in our application.
+Assuming you've created a user with the id of `1` during your testing of the application, let's run some test queries to ensure things are set up correctly. We'll create a sample hoot associated with the first user to sign-up in our application.
 
 Run the following command:
 
@@ -48,7 +48,7 @@ If the command was successful, you should see the following response:
 INSERT 0 1
 ```
 
-Now try inserting a hoot with a non-existant author:
+Now try inserting a hoot with a non-existent author:
 
 ```SQL
 INSERT INTO hoots (author, title, text, category) VALUES (1066, 'Prepare for Glory', 'Harold Godwinson sends his regards', 'history');
@@ -71,7 +71,7 @@ SELECT * FROM hoots JOIN users ON hoots.author = users.id;
 The above command should produce something like the following output:
 
 ```sql
- id | author |    title    |         text         | category | id | username |                           password                           
+ id | author |    title    |         text         | category | id | username |                           password
 ----+--------+-------------+----------------------+----------+----+----------+--------------------------------------------------------------
   1 |      1 | hello world | greetings to you all | news     |  1 | cool_user_name   | $2b$12$oCYf0q64HuyANz3NX0JPYeq9pld3jUKGUKlw5zBB1JvRl/9xm4/za
 ```
@@ -84,7 +84,7 @@ Looks great, but we don't really want our password hashes being sent with this q
 SELECT hoots.*, users.username FROM hoots JOIN users ON hoots.author = users.id;
 ```
 
-That's better! 
+That's better!
 
 Let's also test out our `CASCADE` functionality by deleting user 1 and checking if their hoots still exist:
 

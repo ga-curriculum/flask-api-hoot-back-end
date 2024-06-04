@@ -26,13 +26,13 @@ touch auth_blueprint.py
 
 Add the following to `auth_blueprint.py`:
 
-```python 
+```python
 from flask import Blueprint
 
 authentication_blueprint = Blueprint('authentication_blueprint', __name__)
 ```
 
-This provides us with a new **blueprint object** called `authentication_blueprint`. This object can be used much like the existing `app` object in `app.py`. 
+This provides us with a new **blueprint object** called `authentication_blueprint`. This object can be used much like the existing `app` object in `app.py`.
 
 Remember, we use decorators to mount routes to our `app` object. This allows us to define what code should execute when specific URLs are accessed. For example, the decorator below tells Flask to map the root URL `/` to the function that follows it, which in this case is the `index` function:
 
@@ -42,11 +42,11 @@ def index():
   return "Hello, world!"
 ```
 
-Similarly, **blueprint objects** can be used to define routes in the same way.  
+Similarly, **blueprint objects** can be used to define routes in the same way.
 
-Instead of using `@app.route` to define all routes in the application, we can utilize `@authentication_blueprint.route`. This allows us to keep authentication-related routes and logic encapsulated in a separate file. 
+Instead of using `@app.route` to define all routes in the application, we can utilize `@authentication_blueprint.route`. This allows us to keep authentication-related routes and logic encapsulated in a separate file.
 
-> 🏆  This organization helps maintain a clean code structure and makes it easier to manage and scale our application as it grows.
+> 🏆 This organization helps maintain a clean code structure and makes it easier to manage and scale our application as it grows.
 
 To plug it into the main application, we need to **register** the blueprint.
 
@@ -153,7 +153,7 @@ def signup():
         if existing_user:
             cursor.close()
             return jsonify({"error": "Username already taken"}), 400
-        hashed_password = bcrypt.hashpw(bytes(new_user_data["password"], 'utf-8'), bcrypt.gensalt())        
+        hashed_password = bcrypt.hashpw(bytes(new_user_data["password"], 'utf-8'), bcrypt.gensalt())
         cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s) RETURNING id, username", (new_user_data["username"], hashed_password.decode('utf-8')))
         created_user = cursor.fetchone()
         connection.commit()
@@ -182,7 +182,7 @@ def signin():
     except Exception as error:
         return jsonify({"error": "Invalid credentials."}), 401
     finally:
-        connection.close()  
+        connection.close()
 ```
 
 You should now be able to test this out in Postman and receive valid responses when making requests to `http://127.0.0.1:5000/auth/signin` and `http://127.0.0.1:5000/auth/signup`.

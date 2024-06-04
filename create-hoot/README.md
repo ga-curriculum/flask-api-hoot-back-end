@@ -43,7 +43,7 @@ Let's breakdown what we'll accomplish inside our controller function.
 Our function will use the connection `cursor` to `execute` the following SQL query:
 
 ```sql
-INSERT INTO hoots (author, title, text, category) 
+INSERT INTO hoots (author, title, text, category)
 VALUES (%s, %s, %s, %s)
 RETURNING *
 ```
@@ -63,18 +63,18 @@ def create_hoot():
     try:
         new_hoot = request.json
         new_hoot["author"] = g.user["id"]
-        conection = get_db_connection()
-        cursor = conection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        connection = get_db_connection()
+        cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         cursor.execute("""
-                        INSERT INTO hoots (author, title, text, category) 
+                        INSERT INTO hoots (author, title, text, category)
                         VALUES (%s, %s, %s, %s)
                         RETURNING *
-                        """, 
+                        """,
                         (new_hoot['author'], new_hoot['title'], new_hoot['text'], new_hoot['category'])
         )
         created_hoot = cursor.fetchone()
-        conection.commit()
-        conection.close()
+        connection.commit()
+        connection.close()
         return jsonify({"hoot": created_hoot}), 201
     except Exception as error:
         return jsonify({"error": str(error)}), 500
@@ -90,27 +90,27 @@ If the sign up request was successful, you should see something like the followi
 
 ```json
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBbGV4MiJ9.VLAksJtvVvicoQNrrftqhtRbGJFMy6fPk9s8yq3YbkE",
-    "user": {
-        "id": 2,
-        "username": "your-username"
-    }
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJBbGV4MiJ9.VLAksJtvVvicoQNrrftqhtRbGJFMy6fPk9s8yq3YbkE",
+  "user": {
+    "id": 2,
+    "username": "your-username"
+  }
 }
 ```
 
-We'll be using the `token` issued here in the next few steps, so be sure to *save it somewhere easily accessible*. When you copy the value of the token, **do not include the quotes**.
+We'll be using the `token` issued here in the next few steps, so be sure to _save it somewhere easily accessible_. When you copy the value of the token, **do not include the quotes**.
 
 ![Token](./assets/response-token.png)
 
-Create a Hoot collection in **Postman** and click on the collection's **Authorization** tab. 
+Create a Hoot collection in **Postman** and click on the collection's **Authorization** tab.
 
 ![Auth tab](./assets/auth-tab.png)
 
-Set the **Type** to **Bearer Token** and add your `token` to the **Token** input field. 
+Set the **Type** to **Bearer Token** and add your `token` to the **Token** input field.
 
 ![Bearer token](./assets/bearer-token.png)
 
-Afterwards, don't forget to click the **Save button**. 
+Afterwards, don't forget to click the **Save button**.
 
 > 💡 Depending on the width of your **Postman** window, you might need to click the dropdown menu in the screenshot below to access the **Save** option. Alternatively, the **Save** button will be represented by a floppy disk icon.
 
@@ -130,9 +130,9 @@ Within the **Body** tab, select **raw**, and change the **Text** dropdown to **J
 
 ```json
 {
-    "title": "Big News",
-    "text": "Lorem ipsum",
-    "category": "news"
+  "title": "Big News",
+  "text": "Lorem ipsum",
+  "category": "news"
 }
 ```
 
@@ -140,12 +140,12 @@ If your request was successful, you should see something like the response below
 
 ```json
 {
-    "hoot": {
-        "author": 2,
-        "category": "news",
-        "id": 2,
-        "text": "Lorem ipsum",
-        "title": "Big News"
-    }
+  "hoot": {
+    "author": 2,
+    "category": "news",
+    "id": 2,
+    "text": "Lorem ipsum",
+    "title": "Big News"
+  }
 }
 ```

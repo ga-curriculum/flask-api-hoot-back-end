@@ -40,10 +40,10 @@ Let's breakdown what we'll accomplish inside our controller function.
 Our function will use the connection `cursor` to `execute` the following SQL query:
 
 ```sql
-SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username 
-FROM hoots h 
-INNER JOIN users u_hoot ON h.author = u_hoot.id 
-LEFT JOIN comments c ON h.id = c.hoot 
+SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username
+FROM hoots h
+INNER JOIN users u_hoot ON h.author = u_hoot.id
+LEFT JOIN comments c ON h.id = c.hoot
 LEFT JOIN users u_comment ON c.author = u_comment.id;
 ```
 
@@ -60,18 +60,18 @@ Add the following to `hoots_blueprint.py`:
 ```python
 @hoots_blueprint.route('/hoots', methods=['GET'])
 def hoots_index():
-    try:     
-        conection = get_db_connection()
-        cursor = conection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-        cursor.execute("""SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username 
-                            FROM hoots h 
-                            INNER JOIN users u_hoot ON h.author = u_hoot.id 
-                            LEFT JOIN comments c ON h.id = c.hoot 
+    try:
+        connection = get_db_connection()
+        cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        cursor.execute("""SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username
+                            FROM hoots h
+                            INNER JOIN users u_hoot ON h.author = u_hoot.id
+                            LEFT JOIN comments c ON h.id = c.hoot
                             LEFT JOIN users u_comment ON c.author = u_comment.id;
                        """)
         hoots = cursor.fetchall()
-        conection.commit()
-        conection.close()
+        connection.commit()
+        connection.close()
         return jsonify({"hoots": hoots}), 200
     except Exception as error:
         return jsonify({"error": str(error)}), 500
@@ -83,13 +83,13 @@ In Postman, make a `GET` request to the following:
 http://127.0.0.1:5000/hoots
 ```
 
-When we test this in Postman, we *do* get a response! 
+When we test this in Postman, we _do_ get a response!
 
 But check out what happens if you query for a hoot with multiple comments: you end up with a list of hoots with duplicates!
 
 This is because the SQL response sends a new row for each individual comment. We'll need logic to zip these together into the more expected format: `comments` should be a list within the `hoot` object, and it should contain all comments associated with that hoot, like so:
 
-```python 
+```python
 sampleHoot = {
     # other hoot properties
     "comments": [
@@ -101,7 +101,7 @@ sampleHoot = {
 
 > 💡 At this point, you may see an empty comments array if you did not use SQL commands to create comments previously.
 
-To accomplish this, we'll write a helper function named `conslidated_comments_in_hoots` that accepts the SQL response dictionaries as input, and returns the expected format of nested comments within hoots. Fortunately, we're back in vanilla python world for this problem, but this will be a tricky algorithm to write! 
+To accomplish this, we'll write a helper function named `consolidate_comments_in_hoots` that accepts the SQL response dictionaries as input, and returns the expected format of nested comments within hoots. Fortunately, we're back in vanilla python world for this problem, but this will be a tricky algorithm to write!
 
 Remember, not every hoot has an associated comment, but some may have multiple associated comments. Since this one feels like an interview programming puzzle, there will be many possible answers.
 
@@ -119,13 +119,13 @@ def consolidate_comments_in_hoots(hoots_with_comments):
         for consolidated_hoot in consolidated_hoots:
             if hoot["id"] == consolidated_hoot["id"]:
                 hoot_exists = True
-                consolidated_hoot["comments"].append(                    
+                consolidated_hoot["comments"].append(
                     {"comment_text": hoot["comment_text"],
                      "comment_id": hoot["comment_id"],
                      "comment_author_username": hoot["comment_author_username"]
                     })
                 break
-        
+
         # If the hoot doesn't exist in consolidated_hoots, add it
         if not hoot_exists:
             hoot["comments"] = []
@@ -140,7 +140,7 @@ def consolidate_comments_in_hoots(hoots_with_comments):
             del hoot["comment_text"]
             del hoot["comment_author_username"]
             consolidated_hoots.append(hoot)
-    
+
     return consolidated_hoots
 ```
 
@@ -156,13 +156,13 @@ And update `hoots_index` as shown below:
 ```python
 @hoots_blueprint.route('/hoots', methods=['GET'])
 def hoots_index():
-    try:     
-        conection = get_db_connection()
-        cursor = conection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-        cursor.execute("""SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username 
-                            FROM hoots h 
-                            INNER JOIN users u_hoot ON h.author = u_hoot.id 
-                            LEFT JOIN comments c ON h.id = c.hoot 
+    try:
+        connection = get_db_connection()
+        cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        cursor.execute("""SELECT h.id, h.author AS hoot_author_id, h.title, h.text, h.category, u_hoot.username AS author_username, c.id AS comment_id, c.text AS comment_text, u_comment.username AS comment_author_username
+                            FROM hoots h
+                            INNER JOIN users u_hoot ON h.author = u_hoot.id
+                            LEFT JOIN comments c ON h.id = c.hoot
                             LEFT JOIN users u_comment ON c.author = u_comment.id;
                        """)
         hoots = cursor.fetchall()
@@ -170,8 +170,8 @@ def hoots_index():
         # Update:
         consolidated_hoots = consolidate_comments_in_hoots(hoots)
 
-        conection.commit()
-        conection.close()
+        connection.commit()
+        connection.close()
         return jsonify({"hoots": consolidated_hoots}), 200
     except Exception as error:
         return jsonify({"error": str(error)}), 500
