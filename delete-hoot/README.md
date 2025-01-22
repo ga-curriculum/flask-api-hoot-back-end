@@ -1,4 +1,7 @@
-# ![Flask API - Hoot Back-End - Delete Hoot](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Back-End</span>
+  <span class="subhead">Delete Hoot</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able build a route that removes a single hoot from the database by id.
 

@@ -1,4 +1,7 @@
-# ![Flask API - Hoot Back-End - Index Hoots](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Back-End</span>
+  <span class="subhead">Index Hoots</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to create an index route to retrieve all hoots from the database and send this data as a JSON response to the client.
 

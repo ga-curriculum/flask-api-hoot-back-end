@@ -1,4 +1,7 @@
-# ![Flask API - Hoot Back-End - Show Hoot](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Back-End</span>
+  <span class="subhead">Show Hoot</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able build a route to retrieves a single hoot from the database and sends this data as a JSON response to the client.
 

@@ -1,0 +1,102 @@
+import "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/universal-resources-internal/static/v2/pkl/template.pkl" as Template
+
+// Add microlessons here, in the order they should be delivered
+
+setup = new Template.Microlesson {
+  friendlyName = "Setup"
+  dirName = "setup"
+  type = "Content"
+  videoUrl = ""
+}
+
+settingTheStage = new Template.Microlesson {
+  friendlyName = "Setting the Stage"
+  dirName = "setting-the-stage"
+  type = "Content"
+  videoUrl = ""
+}
+
+startingWithAuthBoilerplate = new Template.Microlesson {
+  friendlyName = "Starting with Auth Boilerplate"
+  dirName = "starting-with-auth-boilerplate"
+  type = "Content"
+  videoUrl = ""
+}
+
+settingUpTheSqlDatabase = new Template.Microlesson {
+  friendlyName = "Setting up the SQL Database"
+  dirName = "setting-up-the-sql-database"
+  type = "Content"
+  videoUrl = ""
+}
+
+hootBlueprint = new Template.Microlesson {
+  friendlyName = "Hoot Blueprint"
+  dirName = "hoot-blueprint"
+  type = "Content"
+  videoUrl = ""
+}
+
+createHoot = new Template.Microlesson {
+  friendlyName = "Create Hoot"
+  dirName = "create-hoot"
+  type = "Content"
+  videoUrl = ""
+}
+
+indexHoots = new Template.Microlesson {
+  friendlyName = "Index Hoots"
+  dirName = "index-hoots"
+  type = "Content"
+  videoUrl = ""
+}
+
+showHoot = new Template.Microlesson {
+  friendlyName = "Show Hoot"
+  dirName = "show-hoot"
+  type = "Content"
+  videoUrl = ""
+}
+
+updateHoot = new Template.Microlesson {
+  friendlyName = "Update Hoot"
+  dirName = "update-hoot"
+  type = "Content"
+  videoUrl = ""
+}
+
+deleteHoot = new Template.Microlesson {
+  friendlyName = "Delete Hoot"
+  dirName = "delete-hoot"
+  type = "Content"
+  videoUrl = ""
+}
+
+commentBlueprint = new Template.Microlesson {
+  friendlyName = "Comment Blueprint"
+  dirName = "comment-blueprint"
+  type = "Content"
+  videoUrl = ""
+}
+
+createComment = new Template.Microlesson {
+  friendlyName = "Create Comment"
+  dirName = "create-comment"
+  type = "Content"
+  videoUrl = ""
+}
+
+updateComment = new Template.Microlesson {
+  friendlyName = "Update Comment"
+  dirName = "update-comment"
+  type = "Content"
+  videoUrl = ""
+}
+
+deleteComment = new Template.Microlesson {
+  friendlyName = "Delete Comment"
+  dirName = "delete-comment"
+  type = "Content"
+  videoUrl = ""
+}
+

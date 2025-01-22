@@ -1,4 +1,7 @@
-# ![Flask API - Hoot Back-End - Starting with Auth Boilerplate](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Back-End</span>
+  <span class="subhead">Starting with Auth Boilerplate</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will be able to bootstrap Flask applications with their JWT authentication starter code.
 
@@ -71,7 +74,7 @@ app.register_blueprint(authentication_blueprint)
 
 Now we need to move our existing auth routes out of `app.py` and into the new `auth_blueprint.py` (replacing all instances of `@app` with `@authentication_blueprint`).
 
-We'll begin by cleaning up `app.py`. Here we'll want to remove the `signup`, `signin`, and `vip_lounge` routes and our `get_db_connection` function.
+We'll begin by cleaning up `app.py`. Here we'll want to remove the `/sign-up`, `/sign-in`, `/users` and `user/<user_id>` routes and our `get_db_connection` function.
 
 Our `app.py` should look like the following:
 
@@ -142,8 +145,8 @@ authentication_blueprint = Blueprint('authentication_blueprint', __name__)
 
 # Routes here:
 
-@authentication_blueprint.route('/auth/signup', methods=['POST'])
-def signup():
+@authentication_blueprint.route('/auth/sign-up', methods=['POST'])
+def sign_up():
     try:
         new_user_data = request.get_json()
         connection = get_db_connection()
@@ -152,20 +155,20 @@ def signup():
         existing_user = cursor.fetchone()
         if existing_user:
             cursor.close()
-            return jsonify({"error": "Username already taken"}), 400
+            return jsonify({"err": "Username already taken"}), 400
         hashed_password = bcrypt.hashpw(bytes(new_user_data["password"], 'utf-8'), bcrypt.gensalt())
         cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s) RETURNING id, username", (new_user_data["username"], hashed_password.decode('utf-8')))
         created_user = cursor.fetchone()
         connection.commit()
-        token = jwt.encode(created_user, os.getenv('JWT_SECRET'))
-        return jsonify({"token": token, "user": created_user}), 201
-    except Exception as error:
-        return jsonify({"error": str(error)}), 401
-    finally:
         connection.close()
+        payload = {"username": created_user["username"], "id": created_user["id"]}
+        token = jwt.encode({ "payload": payload }, os.getenv('JWT_SECRET'))
+        return jsonify({"token": token}), 201
+    except Exception as err:
+        return jsonify({"err": str(err)}), 401
 
-@authentication_blueprint.route('/auth/signin', methods=["POST"])
-def signin():
+@authentication_blueprint.route('/auth/sign-in', methods=["POST"])
+def sign_in():
     try:
         sign_in_form_data = request.get_json()
         connection = get_db_connection()
@@ -173,18 +176,19 @@ def signin():
         cursor.execute("SELECT * FROM users WHERE username = %s;", (sign_in_form_data["username"],))
         existing_user = cursor.fetchone()
         if existing_user is None:
-            return jsonify({"error": "Invalid credentials."}), 401
+            return jsonify({"err": "Invalid credentials."}), 401
         password_is_valid = bcrypt.checkpw(bytes(sign_in_form_data["password"], 'utf-8'), bytes(existing_user["password"], 'utf-8'))
         if not password_is_valid:
-            return jsonify({"error": "Invalid credentials."}), 401
-        token = jwt.encode({"username": existing_user["username"], "id": existing_user["id"]}, os.getenv('JWT_SECRET'))
+            return jsonify({"err": "Invalid credentials."}), 401
+        payload = {"username": existing_user["username"], "id": existing_user["id"]}
+        token = jwt.encode({ "payload": payload }, os.getenv('JWT_SECRET'))
         return jsonify({"token": token}), 201
-    except Exception as error:
-        return jsonify({"error": "Invalid credentials."}), 401
+    except Exception as err:
+        return jsonify({"err": err.message}), 500
     finally:
         connection.close()
 ```
 
-You should now be able to test this out in Postman and receive valid responses when making requests to `http://127.0.0.1:5000/auth/signin` and `http://127.0.0.1:5000/auth/signup`.
+You should now be able to test this out in Postman and receive valid responses when making requests to `http://127.0.0.1:5000/auth/sign-in` and `http://127.0.0.1:5000/auth/sign-up`.
 
 > 💡 You might have some errors to work through after this much refactoring, so keep at it until your Postman requests are error-free, and we'll see you in the next step.

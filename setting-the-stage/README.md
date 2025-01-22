@@ -1,4 +1,7 @@
-# ![Express API - Hoot Back-End - Setting the Stage](./assets/hero.png)
+<h1>
+  <span class="headline">Hoot Back-End</span>
+  <span class="subhead">Setting the Stage</span>
+</h1>
 
 **Learning objective:** By the end of this lesson, students will understand the architecture and functional requirements of building a secure Express API for a blogging application, including user authentication and CRUD operations for blog posts and comments.
 
