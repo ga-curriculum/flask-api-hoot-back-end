@@ -7,7 +7,7 @@
 
 ## Overview
 
-Take a moment to review some of the starter code included in the [Flask JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/flask-jwt-auth-template).
+Take a moment to review some of the starter code included in the [Flask JWT Auth Template](https://github.com/ga-curriculum/flask-jwt-auth-template).
 
 In this lesson, we'll expand upon this code by adding modularity to accommodate additional functionality beyond user authentication.
 
