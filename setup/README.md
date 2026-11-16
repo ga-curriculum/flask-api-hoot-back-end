@@ -13,12 +13,12 @@ cd ~/code/ga/lectures
 
 ## Cloning the auth boilerplate
 
-This lecture uses the [Flask JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/flask-jwt-auth-template.git) as starter code. The template includes code to authenticate users with JWT tokens.
+This lecture uses the [Flask JWT Auth Template](https://github.com/ga-curriculum/flask-jwt-auth-template.git) as starter code. The template includes code to authenticate users with JWT tokens.
 
-Navigate to the [Flask JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/flask-jwt-auth-template.git) and clone the repository to your machine:
+Navigate to the [Flask JWT Auth Template](https://github.com/ga-curriculum/flask-jwt-auth-template.git) and clone the repository to your machine:
 
 ```bash
-git clone https://git.generalassemb.ly/modular-curriculum-all-courses/flask-jwt-auth-template.git
+git clone https://github.com/ga-curriculum/flask-jwt-auth-template.git
 ```
 
 Once we have the repository on our machines, we can change the name of the directory to `flask-api-hoot-back-end`:

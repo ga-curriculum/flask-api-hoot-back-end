@@ -11,7 +11,7 @@ In this module, we'll build an API back-end for a full-stack blogging applicatio
 
 Within our Flask API, we'll implement full CRUD functionality on a blog post resource called `hoots`, as well as `create` functionality on a `comments` resource.
 
-Our Flask API will make use of much of the code in the [Flask API JWT Auth Template](https://git.generalassemb.ly/modular-curriculum-all-courses/flask-jwt-auth-template.git), with a few caveats.
+Our Flask API will make use of much of the code in the [Flask API JWT Auth Template](https://github.com/ga-curriculum/flask-jwt-auth-template.git), with a few caveats.
 
 To demonstrate the modularity of Flask, we'll be expanding upon the code found in the Flask API JWT Auth Template. To better understand these changes, we'll be pulling code snippets from the template, rather than cloning the template directly.
 

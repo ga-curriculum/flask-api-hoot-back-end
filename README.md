@@ -40,7 +40,7 @@ In this module, students will build a backend for the Hoot blogging platform usi
 
 ### Solution code
 
-🏁 [Solution code](https://git.generalassemb.ly/modular-curriculum-all-courses/flask-api-hoot-back-end-solution)
+🏁 [Solution code](https://github.com/ga-curriculum/flask-api-hoot-back-end-solution)
 
 ### Course landing pages
 
